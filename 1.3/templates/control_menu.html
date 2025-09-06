@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
+  <title>ZackCarPlay</title>
+</head>
+
+<body>
+  <div id="mainDisplay">
+   <div id="tsparticles"></div>
+   <div id="topBar">
+    <div id="topBarElements">
+      <span id="time">now</span>
+      <span id="date">today</span>
+      <span id="network">🛜</span>
+      <img id="charging" src="../static/images/thunder.svg" alt="charging icon">
+      <img id="battery" src="../static/images/battery-half-solid-full.svg" alt="battery">
+      <img src="../static/images/fullscreen.png" alt="fullscreen" id="fullscreenbutton">
+    </div>
+   </div>
+    <div id="apps">
+      <div class="app" id="shutdown" onclick="if (confirm('Are you sure you want to shutdown?')) { window.location.href='/shutdown'; }">
+        <img src="/static/images/shutdown.png" alt="Shutdown">
+        <h4>Shutdown</h4>
+      </div>
+      <div class="app" id="exit" onclick="window.location.href='/'">
+        <img src="/static/images/exit.png" alt="Exit">
+        <h4>Exit</h4>
+      </div>
+      <div class="app" id="settings" onclick="window.location.href='/settings'">
+        <img src="/static/images/settings.png" alt="Settings">
+        <h4>Settings</h4>
+      </div>
+      <div class="app" id="control" onclick="window.location.href='/control'">
+        <img src="/static/images/control.png" alt="Music">
+        <h4>Control</h4>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3"></script>
+  <script src="{{ url_for('static', filename='control_menu.js') }}"></script>
+</body>
+
+</html>

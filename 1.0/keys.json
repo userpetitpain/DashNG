@@ -1,0 +1,36 @@
+{
+  "phares": [
+    "n"
+  ],
+  "gyrophares": [
+    "shift",
+    "n"
+  ],
+  "esc & tc": [
+    "ctrl",
+    "a"
+  ],
+  "neon_sous_le_chassis": [
+    "alt",
+    "n"
+  ],
+  "appels de phares": [
+    "shift",
+    "ctrl",
+    "alt",
+    "t"
+  ],
+  "feux_antibrouillards": [
+    "shift",
+    "ctrl",
+    "alt",
+    "k"
+  ],
+  "v\u00e9hicule menu": [
+    "ctrl",
+    "e"
+  ],
+  "Boost": [
+    "alt"
+  ]
+}

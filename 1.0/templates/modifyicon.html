@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modify icon</title>
+</head>
+<body>
+  <form id="uploadForm" enctype="multipart/form-data">
+  <input type="file" name="icon" accept="image/*">
+  <input type="text" name="name" placeholder="Nom de l'app">
+  <button type="submit">Ajouter l'app</button>
+</form>
+
+<script>
+document.getElementById('uploadForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    
+    const res = await fetch('/upload_icon', {
+        method: 'POST',
+        body: formData
+    });
+    
+    const data = await res.json();
+    if (data.status === "success") {
+        alert("Image uploadée ! Tu peux maintenant créer l'app avec cette icône.");
+    } else {
+        alert("Erreur : " + data.message);
+    }
+};
+</script>
+
+</body>
+</html>
