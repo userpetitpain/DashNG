@@ -103,7 +103,9 @@ async function loadShortcuts() {
       appDiv.id = name;
 
       // Formatage des actions : sépare les touches et enlève les espaces inutiles
-      const actions = actionsArray.map(s => s.split(/\s+/).filter(Boolean));
+      const actions = (Array.isArray(actionsArray) ? actionsArray : [actionsArray])
+  .map(s => s.split(/\s+/).filter(Boolean));
+
 
       // Au clic : envoie la commande test au serveur
       appDiv.onclick = async () => {
