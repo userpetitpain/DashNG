@@ -21,6 +21,7 @@
       <img src="../static/images/fullscreen.png" alt="fullscreen" id="fullscreenbutton">
     </div>
    </div>
+   <div id="settings_popup"></div>
     <div id="apps">
       <div class="app" id="shutdown" onclick="if (confirm('Are you sure you want to shutdown?')) { window.location.href='/shutdown'; }">
         <img src="/static/images/shutdown.png" alt="Shutdown">
@@ -30,7 +31,7 @@
         <img src="/static/images/exit.png" alt="Exit">
         <h4>Exit</h4>
       </div>
-      <div class="app" id="settings" onclick="window.location.href='/settings'">
+      <div class="app" id="settings" >
         <img src="/static/images/settings.png" alt="Settings">
         <h4>Settings</h4>
       </div>
@@ -42,6 +43,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@3"></script>
   <script src="{{ url_for('static', filename='control_menu.js') }}"></script>
+  <script src="{{ url_for('static', filename='popup.js')}}"></script>
 </body>
 
 </html>
