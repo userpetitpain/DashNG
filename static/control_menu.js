@@ -1,33 +1,33 @@
 window.onload = async () => {
   tsParticles.load("tsparticles", {
-    background: {
-      color: "#0d1117",
-    },
+    background: { color: "#0d1117" },
     particles: {
       number: { value: 80 },
       size: { value: 3 },
       color: { value: "#ffffff" },
       move: { enable: true, speed: 2 },
-      links: {
-        enable: true,
-        distance: 150,
-        color: "#ffffff",
-        opacity: 0.4,
-        width: 1,
-      },
+      links: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
     },
     interactivity: {
       events: {
         onHover: { enable: true, mode: "repulse" },
         onClick: { enable: true, mode: "push" },
       },
-      modes: {
-        repulse: { distance: 100 },
-        push: { quantity: 4 },
-      },
+      modes: { repulse: { distance: 100 }, push: { quantity: 4 } },
     },
   });
+
+  const apps = document.querySelectorAll(".app");
+
+  apps.forEach(app => {
+    app.addEventListener('click', () => {
+      app.classList.remove('kaboom-fade-out');
+      void app.offsetWidth;
+      app.classList.add('kaboom-fade-out');
+    });
+  });
 };
+
 
 const fullscreenBTN = document.getElementById("fullscreenbutton");
 
@@ -76,8 +76,7 @@ function update_battery() {
     battery.src = "static/images/battery-half-solid-full.svg";
   else if (battery_level > 10)
     battery.src = "static/images/battery-quarter-solid-full.svg";
-  else
-    battery.src = "static/images/battery-empty-solid-full.svg";
+  else battery.src = "static/images/battery-empty-solid-full.svg";
 
   if (charging || battery_level < 2) {
     charging_icon.style.display = "inline-block";
@@ -89,7 +88,6 @@ function update_battery() {
   if (battery_level <= 2) charging = true;
   if (battery_level >= 100) charging = false;
 }
-
 
 setInterval(update_battery, 2000);
 update_battery();

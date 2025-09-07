@@ -13,7 +13,3 @@ const hide_popup = (p) => {
     p.style.display = 'none';
   }, { once: true });
 }
-
-// Exemple : clic sur un bouton pour ouvrir/fermer
-document.getElementById("settings").onclick = () => show_popup(settings_popup);
-settings_popup.onclick = () => hide_popup(settings_popup);
