@@ -2,3 +2,4 @@ config.json
 keys.json
 *.log
 log.log
+__pycache__
