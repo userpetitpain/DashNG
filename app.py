@@ -221,22 +221,17 @@ def commands():
         com = input(">> ")
         if com == "exit" or com == "quit" or com == "q" or com == "stop":
             info("Exiting command loop")
-            print("Exiting command loop. Use 'shutdown' or 'force_shutdown' to stop the server. (or ctrl c)")
             break
         elif com == "shutdown":
             info("Shutdown command received")
-            print("Shutdown command received. Use 'force_shutdown' to stop the server immediately.")
             shutdown()
         elif com == "force_shutdown":
             info("Force shutdown command received")
-            print("Force shutdown command received. The server will stop immediately.")
             force_shutdown()
         elif com == "reload_shortcut":
             info("Reload shortcut command received")
-            print("Reloading shortcuts...")
             reload_shortcut()
         else:
-            print("Unknown command. Available commands: exit, quit, q, stop, shutdown, force_shutdown, reload_shortcut")
             warning("Unknown command received: %s", com)
 
 threading.Thread(target=commands, daemon=True).start()
