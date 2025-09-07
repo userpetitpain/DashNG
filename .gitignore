@@ -3,3 +3,4 @@ keys.json
 *.log
 log.log
 __pycache__
+static/icons/*
