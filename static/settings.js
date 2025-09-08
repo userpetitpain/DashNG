@@ -4,7 +4,7 @@ const list_shortcuts = () => {
     .then(data => {
       if (data.status !== "success") return;
 
-      const container = document.querySelector("ul")
+      const container = document.getElementById("shortcuts-list")
       container.innerHTML = '';
 
       const shortcuts = data.shortcuts;
@@ -17,6 +17,7 @@ const list_shortcuts = () => {
         };
         const li = document.createElement("li");
         li.appendChild(btn);
+        btn.className = "settings-button"
         container.appendChild(li);
       }
     })
@@ -92,6 +93,7 @@ function remove_shortcut(name) {
         appDiv.remove();
       }
       alert("Shortcut removed successfully!");
+      list_shortcuts();
     } else {
       alert("Failed to remove shortcut. >:)");
     }

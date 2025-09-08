@@ -38,7 +38,6 @@ def execute(shortcut):
     key = keys[shortcut]
     
     if len(key) > 4:
-        print("Shortcut too long:", key)
         return
       
     for k in key[:-1]:
@@ -61,14 +60,12 @@ def execute(shortcut):
 def add_shortcut(shortcut, keys_list):
   if shortcut in keys:
     warning(f"Shortcut already exists: {shortcut}")
-    print(f"Shortcut already exists: {shortcut}")
   else:
     keys[shortcut] = keys_list
     with open("keys.json", "w") as f:
       json.dump(keys, f, indent=2)
     debug("keys.json updated successfully")
     info(f"Added shortcut: {shortcut} -> {keys_list}")
-    print(f"Added shortcut: {shortcut} -> {keys_list}")
     
 def repair_cached_shortcuts():
   try:
@@ -81,7 +78,6 @@ def repair_cached_shortcuts():
     debug("keys.json reloaded successfully")
   except Exception as e:
     error(f"Error reloading keys.json: {e}")
-    print(f"Error reloading keys.json: {e}")
     
 def replace_spaces(d):
     return {cle.replace(" ", "_"): valeur for cle, valeur in d.items()}
@@ -91,7 +87,6 @@ def list_shortcuts():
     return keys
   else:
     warning("No shortcuts found")
-    print("No shortcuts found")
     return {}
   
 def remove_shortcut(shortcut):
@@ -101,9 +96,7 @@ def remove_shortcut(shortcut):
       json.dump(keys, f, indent=4)
     debug("keys.json updated successfully after removing shortcut")
     info(f"Removed shortcut: {shortcut}")
-    print(f"Removed shortcut: {shortcut}")
   else:
     warning(f"Shortcut not found for removal: {shortcut}")
-    print(f"Shortcut not found for removal: {shortcut}")
     
 info("Command module working correctly")

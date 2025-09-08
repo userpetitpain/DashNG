@@ -22,7 +22,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: clamp(15px, 4vw, 40px); /* augmenté le minimum et maximum */
+  gap: clamp(15px, 4vw, 40px);
   padding: 10px;
 }
 
@@ -54,9 +54,32 @@ body {
   color: #333;
 }
 
-.app:active {
-  background-color: rgba(0,0,0,0.1);
-  transition: 0.05s ease-in-out;
+.y-fade-in {
+  animation: y-fade-in 0.5s ease;
+}
+
+.fade-out {
+  animation: fade-out 0.5s;
+}
+
+.kaboom-fade-out {
+  animation: kaboom-fade-out 0.3s;
+}
+
+.settings-button {
+  background-color: #042656;
+  color: white;
+  border: 0 transparent solid;
+  border-radius: 5px;
+  padding: 0.2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  font-size: 2em;
+  margin: 0.3em;
+}
+
+.settings-h1 {
+  font-size: 3em;
 }
 
 #tsparticles {
@@ -121,6 +144,97 @@ body {
 #charging {
   height: 1.7em;
   width: 1.7em;
+}
+
+#settings_popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* centrage initial */
+  background-color: rgb(224, 224, 224);
+  color: white;
+  width: 50%;
+  height: 50%;
+  border-radius: 10px;
+  display: none;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+#settings-button-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#settings_popup #settings-button-list button {
+  min-width: 10%;
+  width: 25%;
+  max-width: 50%;
+  min-height: 1em;
+  max-height: 3.5em;
+
+}
+
+#hide-settings-popup {
+  top: 0;
+  left: 0;
+  color: black;
+  font-family: monospace;
+  cursor: pointer;
+  font-size: 2em;
+}
+
+#settings-title {
+  text-align: center;
+  font-size: 3em;
+  color: black;
+  margin: 0;
+}
+
+#shortcuts-list {
+  list-style-type: none;
+  color: black;
+}
+
+/* Animation : ne bouge que Y */
+@keyframes y-fade-in {
+  0% {
+    transform: translate(-50%, calc(-50% + 20px)); /* décalage vertical + centrage */
+    opacity: 0;
+  }
+  30% {
+    transform: translate(-50%, -50%); /* position finale centrée */
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%); /* position finale centrée */
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+    transform: translate(-50%, -50%);
+  } to {
+    opacity: 0;
+    transform: translateX(10px);
+    transform: translate(-50%, calc(-50% + 20px));
+  }
+}
+
+@keyframes kaboom-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
