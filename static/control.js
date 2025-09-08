@@ -143,17 +143,6 @@ async function loadShortcuts() {
 
 window.onload = async () => {
   await loadShortcuts();
-  tsParticles.load("tsparticles", {
-  background: { color: "transparent" },
-  fpsLimit: 60,
-  particles: {
-    number: { value: 60 },
-    color: { value: "#ffffff" },
-    shape: { type: "circle" },
-    opacity: { value: 0.6 },
-    size: { value: 3 },
-    move: { enable: true, speed: 2, outMode: "bounce" }
-  }
-});
+  tsParticles.load("tsparticles", {});
 
 };
