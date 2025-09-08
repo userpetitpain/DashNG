@@ -52,4 +52,4 @@ python3 app.py
 ```
 
 Open your browser at :
-[http://<your_pc_ip>:8000](http://127.0.0.1:8000)
+[http://<your_pc_ip>:8000](http://127.0.0.1:8000)/run/media/zack2patate18/38c97c77-eaa9-4c2f-87c9-2552b819ceec/home/zack2patate/
