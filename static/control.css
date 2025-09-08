@@ -10,11 +10,13 @@ body {
   position: relative;
   overflow: hidden;
   background-image: url(images/background2.jpg_large);
+  /* background: transparent; */
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: auto;
 }
 
 #apps {
@@ -23,6 +25,7 @@ body {
   justify-content: center;
   align-items: flex-start;
   gap: clamp(15px, 4vw, 40px);
+  z-index: 2;
   padding: 10px;
 }
 
@@ -88,7 +91,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
+}
+
+#tsparticles canvas {
+  background: transparent !important;
 }
 
 #topBar {
