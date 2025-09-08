@@ -62,7 +62,7 @@ async function add_shortcut(name, actions) {
   }
 }
 
-function add_shortcut(name, actions) {
+function create_shortcut(name, actions) {
   fetch("/add_shortcut", {
     method: "POST",
     headers: {
