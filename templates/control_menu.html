@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='control.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
   <title>ZackCarPlay</title>
 </head>
 
 <body>
+  <div id="tsparticles"></div>
   <div id="mainDisplay">
-    <div id="tsparticles"></div>
     <div id="topBar">
       <div id="topBarElements">
         <span id="time">now</span>
@@ -60,8 +61,8 @@
       </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@3"></script>
   <script defer src="{{ url_for('static', filename='control_menu.js') }}"></script>
+  <script src="{{ url_for('static', filename='tsparticles.js')}}"></script>
   <script src="{{ url_for('static', filename='popup.js')}}"></script>
   <script src="{{ url_for('static', filename='settings.js')}}"></script>
 </body>

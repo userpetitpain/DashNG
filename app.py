@@ -79,6 +79,11 @@ def force_shutdown():
     except Exception as e:
         error(f"Error executing force shutdown: {e}")
         return render_template('noShutdown.html', error=str(e))
+
+@app.route('/debug---test')
+def debug_test():
+    info("Debug test route accessed")
+    return render_template('test.html')
   
 @app.route('/settings')
 def settings():
