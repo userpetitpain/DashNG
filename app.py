@@ -7,10 +7,11 @@ import os
 from werkzeug.utils import secure_filename
 import threading
 import time
+import json
 
 app = flask.Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'icons')
-app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2 MB max
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 
 DEFAULT_ICON_FOLDER = os.path.join("static", "images", "defaults")
 os.makedirs(DEFAULT_ICON_FOLDER, exist_ok=True)
@@ -19,6 +20,14 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 UPLOAD_FOLDER = "static/icons"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
+
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
+if config["first_start"]:
+    if not os.path.exists("keys.json"):
+        with open("keys.json", "w") as f:
+            f.write("{}")
 
 info("Flask app started")
 debug("Initializing Flask routes")
@@ -136,7 +145,6 @@ def upload_icon():
     chosen_icon = request.form.get('iconSelect', '').strip()
 
     if 'icon' in request.files and request.files['icon'].filename != '':
-        # Cas : fichier uploadé
         file = request.files['icon']
         if not allowed_file(file.filename):
             return jsonify({"status": "error", "message": "Fichier invalide"}), 400
@@ -236,4 +244,4 @@ def commands():
 
 threading.Thread(target=commands, daemon=True).start()
 
-app.run(debug=True, host='0.0.0.0', port=8923)
+app.run(debug=True, host='0.0.0.0', port=config["port"])
