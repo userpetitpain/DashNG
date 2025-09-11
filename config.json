@@ -1,3 +1,4 @@
 {
-  "first_start": true
+  "first_start": true,
+  "port": 8923
 }
