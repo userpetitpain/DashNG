@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import threading
 import time
 import json
+import shutil
 
 app = flask.Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'icons')
@@ -18,7 +19,7 @@ os.makedirs(DEFAULT_ICON_FOLDER, exist_ok=True)
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', filename=os.path.join(os.path.dirname(__file__), "log.log"), filemode='a')
 
-UPLOAD_FOLDER = "static/icons"
+UPLOAD_FOLDER = "static/image/user_uploaded"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 with open('config.json', 'r') as f:
@@ -165,7 +166,6 @@ def upload_icon():
         filename = secure_filename(f"{name}.png")
         dest_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-        import shutil
         shutil.copy(src_path, dest_path)
     else:
         return jsonify({"status": "error", "message": "Aucune icône sélectionnée"}), 400

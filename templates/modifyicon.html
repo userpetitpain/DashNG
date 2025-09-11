@@ -1,112 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='modifyicon.css')}}"
+    />
+    <title>Modify icon</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{{url_for('static', filename='modifyicon.css')}}">
-  <title>Modify icon</title>
-</head>
+  <body>
+    <button onclick="window.location.href = '/control_menu'">Return</button>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="icon" accept="image/*" />
 
-<body>
-  <button onclick="window.location.href = '/control_menu'">Return</button>
-  <form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" name="icon" accept="image/*">
+      <select name="name" id="shortcutSelect" required>
+        <option value="">-- Choisir un shortcut --</option>
+      </select>
 
-    <select name="name" id="shortcutSelect" required>
-      <option value="">-- Choisir un shortcut --</option>
-    </select>
+      <label>Choisir une icône :</label>
+      <div id="iconPicker"></div>
 
-    <label>Choisir une icône :</label>
-    <div id="iconPicker"></div>
+      <input type="hidden" id="iconSelectValue" name="iconSelect" />
 
-    <input type="hidden" id="iconSelectValue" name="iconSelect">
+      <button type="submit">Ajouter l'app</button>
+    </form>
 
-    <button type="submit">Ajouter l'app</button>
-  </form>
-
-
-  <script>
-    async function loadShortcuts() {
-      const res = await fetch('/settings/list_shortcuts');
-      const data = await res.json();
-      if (data.status === "success") {
-        const select = document.getElementById('shortcutSelect');
-        for (const name of Object.keys(data.shortcuts)) {
-          const option = document.createElement('option');
-          option.value = name;
-          option.textContent = name;
-          select.appendChild(option);
-        }
-      }
-    }
-
-    async function loadIcons() {
-      const picker = document.getElementById('iconPicker');
-      picker.innerHTML = '';
-
-      // Fonction pour ajouter un groupe d'icônes
-      const addIconGroup = async (url, title) => {
-        const res = await fetch(url);
+    <script>
+      async function loadShortcuts() {
+        const res = await fetch("/settings/list_shortcuts");
         const data = await res.json();
-        if (data.status === "success" && data.icons.length > 0) {
-          const groupTitle = document.createElement('div');
-          groupTitle.textContent = title;
-          groupTitle.style.margin = "10px 0 5px";
-          groupTitle.style.fontWeight = "bold";
-          picker.appendChild(groupTitle);
-
-          data.icons.forEach(icon => {
-            const img = document.createElement('img');
-            img.src = url.includes("default") ? `static/images/defaults/${icon}` : `static/icons/${icon}`;
-            img.alt = icon;
-            img.title = icon;
-            img.style.width = "60px";
-            img.style.height = "60px";
-            img.style.margin = "5px";
-            img.style.cursor = "pointer";
-            img.style.border = "2px solid transparent";
-            img.style.borderRadius = "10px";
-
-            img.onclick = () => {
-              document.querySelectorAll('#iconPicker img').forEach(i => i.style.border = "2px solid transparent");
-              img.style.border = "2px solid #007BFF";
-              document.getElementById('iconSelectValue').value = icon;
-            };
-
-            picker.appendChild(img);
-          });
+        if (data.status === "success") {
+          const select = document.getElementById("shortcutSelect");
+          for (const name of Object.keys(data.shortcuts)) {
+            const option = document.createElement("option");
+            option.value = name;
+            option.textContent = name;
+            select.appendChild(option);
+          }
         }
       }
 
-      await addIconGroup('/list_default_icons', 'Icônes par défaut');
-      await addIconGroup('/list_icons', 'Icônes uploadées');
-    }
+      async function loadIcons() {
+        const picker = document.getElementById("iconPicker");
+        picker.innerHTML = "";
 
-    // Upload du fichier
-    document.getElementById('uploadForm').onsubmit = async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
+        // Fonction pour ajouter un groupe d'icônes
+        const addIconGroup = async (url, title) => {
+          const res = await fetch(url);
+          const data = await res.json();
+          if (data.status === "success" && data.icons.length > 0) {
+            const groupTitle = document.createElement("div");
+            groupTitle.textContent = title;
+            groupTitle.style.margin = "10px 0 5px";
+            groupTitle.style.fontWeight = "bold";
+            picker.appendChild(groupTitle);
 
-      const res = await fetch('/upload_icon', {
-        method: 'POST',
-        body: formData
-      });
+            data.icons.forEach((icon) => {
+              const img = document.createElement("img");
+              img.src = url.includes("default")
+                ? `static/images/defaults/${icon}`
+                : `static/images/user_uploaded${icon}`;
+              img.alt = icon;
+              img.title = icon;
+              img.style.width = "60px";
+              img.style.height = "60px";
+              img.style.margin = "5px";
+              img.style.cursor = "pointer";
+              img.style.border = "2px solid transparent";
+              img.style.borderRadius = "10px";
 
-      const data = await res.json();
-      if (data.status === "success") {
-        alert("Image uploadée ! Tu peux maintenant créer l'app avec cette icône.");
-        loadIcons(); // recharger la liste après upload
-      } else {
-        alert("Erreur : " + data.message);
+              img.onclick = () => {
+                document
+                  .querySelectorAll("#iconPicker img")
+                  .forEach((i) => (i.style.border = "2px solid transparent"));
+                img.style.border = "2px solid #007BFF";
+                document.getElementById("iconSelectValue").value = icon;
+              };
+
+              picker.appendChild(img);
+            });
+          }
+        };
+
+        await addIconGroup("/list_default_icons", "Icônes par défaut");
+        await addIconGroup("/list_icons", "Icônes uploadées");
       }
-    };
 
-    // Charger tout au démarrage
-    loadShortcuts();
-    loadIcons();
+      // Upload du fichier
+      document.getElementById("uploadForm").onsubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
 
-  </script>
-</body>
+        const res = await fetch("/upload_icon", {
+          method: "POST",
+          body: formData,
+        });
 
+        const data = await res.json();
+        if (data.status === "success") {
+          alert(
+            "Image uploadée ! Tu peux maintenant créer l'app avec cette icône."
+          );
+          loadIcons(); // recharger la liste après upload
+        } else {
+          alert("Erreur : " + data.message);
+        }
+      };
+
+      // Charger tout au démarrage
+      loadShortcuts();
+      loadIcons();
+    </script>
+  </body>
 </html>
