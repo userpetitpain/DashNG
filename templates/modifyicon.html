@@ -45,8 +45,6 @@
       async function loadIcons() {
         const picker = document.getElementById("iconPicker");
         picker.innerHTML = "";
-
-        // Fonction pour ajouter un groupe d'icônes
         const addIconGroup = async (url, title) => {
           const res = await fetch(url);
           const data = await res.json();
@@ -61,7 +59,7 @@
               const img = document.createElement("img");
               img.src = url.includes("default")
                 ? `static/images/defaults/${icon}`
-                : `static/images/user_uploaded${icon}`;
+                : `static/images/user_uploaded/${icon}`;
               img.alt = icon;
               img.title = icon;
               img.style.width = "60px";
@@ -88,7 +86,6 @@
         await addIconGroup("/list_icons", "Icônes uploadées");
       }
 
-      // Upload du fichier
       document.getElementById("uploadForm").onsubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -103,13 +100,12 @@
           alert(
             "Image uploadée ! Tu peux maintenant créer l'app avec cette icône."
           );
-          loadIcons(); // recharger la liste après upload
+          loadIcons();
         } else {
           alert("Erreur : " + data.message);
         }
       };
 
-      // Charger tout au démarrage
       loadShortcuts();
       loadIcons();
     </script>
