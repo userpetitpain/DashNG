@@ -11,7 +11,7 @@ import json
 import shutil
 
 app = flask.Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'icons')
+app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'images', 'user_uploaded')
 app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 
 DEFAULT_ICON_FOLDER = os.path.join("static", "images", "defaults")
@@ -19,7 +19,7 @@ os.makedirs(DEFAULT_ICON_FOLDER, exist_ok=True)
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', filename=os.path.join(os.path.dirname(__file__), "log.log"), filemode='a')
 
-UPLOAD_FOLDER = "static/image/user_uploaded"
+UPLOAD_FOLDER = app.config['UPLOAD_FOLDER']
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 with open('config.json', 'r') as f:
@@ -199,32 +199,6 @@ def list_icons():
     except Exception as e:
         error(f"Error listing uploaded icons: {e}")
         return jsonify({"status": "error", "message": str(e)})
-
-
-    
-# @app.route('/test_shortcut', methods=['GET', 'POST'])
-# def test_shortcut():
-#     info("Test shortcut route accessed")
-#     try:
-#         if request.method == 'POST':
-#             # Récupère les actions depuis le JSON
-#             data = request.get_json()
-#             actions = data.get('actions', [])
-#             debug(f"POST actions received: {actions}")
-            
-#             # Exécute les actions (à adapter selon ton système)
-#             for action in actions:
-#                 if isinstance(action, list):
-#                     action_str = '+'.join(action)
-#                 else:
-#                     action_str = str(action)
-#                 command.execute(action_str)
-#                 debug(f"Command executed: {action_str}")
-            
-#         return jsonify({'status': 'success', 'message': 'Action triggered successfully'})
-#     except Exception as e:
-#         error(f"Error executing command: {e}")
-#         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 debug("Flask routes initialized successfully")
 info("Start app")

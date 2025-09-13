@@ -101,12 +101,9 @@ async function loadShortcuts() {
       appDiv.className = "app";
       appDiv.id = name;
 
-      // Formatage des actions : sépare les touches et enlève les espaces inutiles
       const actions = (
         Array.isArray(actionsArray) ? actionsArray : [actionsArray]
       ).map((s) => s.split(/\s+/).filter(Boolean));
-
-      // Au clic : envoie la commande test au serveur
       appDiv.onclick = async () => {
         try {
           const resp = await fetch("/execute_shortcut", {
@@ -121,9 +118,8 @@ async function loadShortcuts() {
         }
       };
 
-      // Image selon le nom, fallback si elle n'existe pas
       const img = document.createElement("img");
-      img.src = `/static/icons/${name}.png`; // ton dossier d'icônes
+      img.src = `/static/images/user_uploaded/${name}.png`;
       img.alt = name;
       img.onerror = () => {
         img.src = "/static/images/default.png";
@@ -144,5 +140,4 @@ async function loadShortcuts() {
 window.onload = async () => {
   await loadShortcuts();
   tsParticles.load("tsparticles", {});
-
 };
