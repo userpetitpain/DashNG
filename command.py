@@ -63,7 +63,7 @@ def add_shortcut(shortcut, keys_list):
   else:
     keys[shortcut] = keys_list
     with open("keys.json", "w") as f:
-      json.dump(keys, f, indent=2)
+      json.dump(keys, f, indent=4)
     debug("keys.json updated successfully")
     info(f"Added shortcut: {shortcut} -> {keys_list}")
     
