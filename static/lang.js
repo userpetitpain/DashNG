@@ -1,7 +1,7 @@
 let translations;
 
 function change_lang(lang) {
-  fetch(`/api/get-${lang}`)
+  fetch(`/lang-get-${lang}`)
     .then((response) => response.json())
     .then((data) => {
       translations = data;
@@ -9,17 +9,19 @@ function change_lang(lang) {
     });
 }
 
-function update_lang(lang) {
+function update_lang() {
+  if (!translations) return;
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
-    el.textContent = translations[lang][key];
+    if (translations[key]) {
+      el.textContent = translations[key];
+    }
   });
 }
 
-window.onload = () => {
-  if (localStorage.getItem("lang")) {
-    change_lang(localStorage.getItem("lang"));
-  } else {
-    change_lang("en");
-  }
-};
+if (localStorage.getItem("lang")) {
+  change_lang(localStorage.getItem("lang"));
+} else {
+  change_lang("en");
+  localStorage.setItem("lang", "en");
+}
