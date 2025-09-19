@@ -47,6 +47,7 @@
         <h3 data-i18n="settings" id="settings-title">Settings</h3>
         <div id="settings-button-list">
           <button
+            data-i18n="add-shortcut"
             class="settings-button"
             onclick="
   add_shortcut(
@@ -77,11 +78,7 @@
         <ul id="shortcuts-list"></ul>
       </div>
       <div id="apps">
-        <div
-          class="app"
-          id="shutdown"
-          onclick="if (confirm('Are you sure you want to shutdown?')) { window.location.href='/shutdown'; }"
-        >
+        <div class="app" id="shutdown" onclick="shutdownConfirm()">
           <img src="/static/images/shutdown.png" alt="Shutdown" />
           <h4 data-i18n="shutdown">Shutdown</h4>
         </div>
@@ -106,6 +103,9 @@
     <script src="{{ url_for('static', filename='tsparticles.js')}}"></script>
     <script src="{{ url_for('static', filename='popup.js')}}"></script>
     <script src="{{ url_for('static', filename='settings.js')}}"></script>
-    <script src="{{ url_for('static', filename='lang.js')}}"></script>
+    <script
+      src="{{ url_for('static', filename='lang.js')}}"
+      type="module"
+    ></script>
   </body>
 </html>

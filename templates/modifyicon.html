@@ -11,23 +11,30 @@
   </head>
 
   <body>
-    <button onclick="window.location.href = '/control_menu'">Return</button>
+    <button data-i18n="return" onclick="window.location.href = '/control_menu'">
+      Return
+    </button>
     <form id="uploadForm" enctype="multipart/form-data">
       <input type="file" name="icon" accept="image/*" />
 
       <select name="name" id="shortcutSelect" required>
-        <option value="">-- Choisir un shortcut --</option>
+        <option data-i18n="select-shortcut" value="">Select shortcut</option>
       </select>
 
-      <label>Choisir une icône :</label>
+      <label data-i18n="select-icon">Select icon</label>
       <div id="iconPicker"></div>
 
       <input type="hidden" id="iconSelectValue" name="iconSelect" />
 
-      <button type="submit">Ajouter l'app</button>
+      <button data-i18n="apply" class="submit">Apply</button>
     </form>
 
-    <script>
+    <script type="module">
+      import {
+        update_lang,
+        change_lang,
+      } from "{{ url_for('static', filename='lang.js')}}";
+
       async function loadShortcuts() {
         const res = await fetch("/settings/list_shortcuts");
         const data = await res.json();
@@ -82,8 +89,8 @@
           }
         };
 
-        await addIconGroup("/list_default_icons", "Icônes par défaut");
-        await addIconGroup("/list_icons", "Icônes uploadées");
+        await addIconGroup("/list_default_icons", "Defaults icons");
+        await addIconGroup("/list_icons", "Custom icons");
       }
 
       document.getElementById("uploadForm").onsubmit = async (e) => {
@@ -97,17 +104,19 @@
 
         const data = await res.json();
         if (data.status === "success") {
-          alert(
-            "Image uploadée ! Tu peux maintenant créer l'app avec cette icône."
-          );
+          alert("Icon updated");
           loadIcons();
         } else {
-          alert("Erreur : " + data.message);
+          alert("Error : " + data.message);
         }
       };
 
       loadShortcuts();
       loadIcons();
     </script>
+    <script
+      src="{{ url_for('static', filename='lang.js')}}"
+      type="module"
+    ></script>
   </body>
 </html>
