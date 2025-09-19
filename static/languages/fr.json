@@ -1,0 +1,18 @@
+{
+  "shutdown": "Éteindre",
+  "exit": "Menu",
+  "settings": "Paramètres",
+  "control": "Control",
+  "return": "retour",
+  "add-shortcut": "Ajouter un raccourci",
+  "edit-shortcut-icon": "Changer l'icon d'un raccourci",
+  "delete-shortcut": "Supprimer un raccourci",
+  "are-you-sure-you-want-to-shutdown": "Êtes vous sûre de vouloir arrêter le serveur ?",
+  "select-file": "Selectionner un fichier",
+  "no-file-selected": "Aucun fichier selectionné",
+  "select-a-shortcut": "Selectionner un raccourci",
+  "default-icons": "Icons par défaut",
+  "apply": "Appliquer",
+  "now": "Maintenant",
+  "today": "Ajourd'hui"
+}
