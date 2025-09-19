@@ -10,8 +10,9 @@
   "are-you-sure-you-want-to-shutdown": "Êtes vous sûre de vouloir arrêter le serveur ?",
   "select-file": "Selectionner un fichier",
   "no-file-selected": "Aucun fichier selectionné",
-  "select-a-shortcut": "Selectionner un raccourci",
-  "default-icons": "Icons par défaut",
+  "select-shortcut": "Selectionner un raccourci",
+  "select-icon": "Selectionnez une icône ",
+  "default-icons": "Icônes par défaut",
   "apply": "Appliquer",
   "now": "Maintenant",
   "today": "Ajourd'hui"

@@ -10,8 +10,9 @@
   "are-you-sure-you-want-to-shutdown": "Are you sure you want to shutdown ?",
   "select-file": "Select file",
   "no-file-selected": "No file selected",
-  "select-a-shortcut": "Select a shortcut",
+  "select-shortcut": "Select shortcut",
   "default-icons": "Default icons",
+  "select-icon": "Select icon",
   "apply": "Apply",
   "now": "Now",
   "today": "Today"
