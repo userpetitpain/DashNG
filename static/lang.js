@@ -1,15 +1,17 @@
 let translations;
 
-function change_lang(lang) {
-  fetch(`/lang-get-${lang}`)
+export function change_lang(lang) {
+  return fetch(`/lang-get-${lang}`)
     .then((response) => response.json())
     .then((data) => {
       translations = data;
+      localStorage.setItem("translations", JSON.stringify(data));
       update_lang();
+      return data;
     });
 }
 
-function update_lang() {
+export function update_lang() {
   if (!translations) return;
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
