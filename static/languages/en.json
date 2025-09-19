@@ -12,5 +12,7 @@
   "no-file-selected": "No file selected",
   "select-a-shortcut": "Select a shortcut",
   "default-icons": "Default icons",
-  "apply": "Apply"
+  "apply": "Apply",
+  "now": "Now",
+  "today": "Today"
 }
