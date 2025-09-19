@@ -1,16 +1,14 @@
 window.onload = async () => {
-
   const apps = document.querySelectorAll(".app");
 
-  apps.forEach(app => {
-    app.addEventListener('click', () => {
-      app.classList.remove('kaboom-fade-out');
+  apps.forEach((app) => {
+    app.addEventListener("click", () => {
+      app.classList.remove("kaboom-fade-out");
       void app.offsetWidth;
-      app.classList.add('kaboom-fade-out');
+      app.classList.add("kaboom-fade-out");
     });
   });
 };
-
 
 const fullscreenBTN = document.getElementById("fullscreenbutton");
 
@@ -70,6 +68,17 @@ function update_battery() {
 
   if (battery_level <= 2) charging = true;
   if (battery_level >= 100) charging = false;
+}
+
+async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function shutdownConfirm() {
+  await sleep(500);
+  if (confirm("Are you sure you want to shutdown ?")) {
+    window.location.href = "/shutdown";
+  }
 }
 
 setInterval(update_battery, 2000);
