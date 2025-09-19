@@ -188,6 +188,15 @@ def list_default_icons():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
     
+@app.route('/lang-get-<lang>')
+def lang_get_en(lang):
+    try:
+        with open(f'static/languages/{lang}.json', 'r') as f:
+            data = f.read()
+        return data, 200, {"Content-Type": "application/json"}
+    except FileNotFoundError:
+        return jsonify({"error": "languages not found"}), 404
+    
 @app.route("/list_icons", methods=["GET"])
 def list_icons():
     try:
